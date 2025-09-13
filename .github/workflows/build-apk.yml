@@ -1,0 +1,81 @@
+name: Build APK
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to build (optional)'
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+    
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Build FOSS Release APK
+      run: ./gradlew assembleFossRelease
+    
+    - name: Upload APK as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: rush-apk-${{ github.event.pull_request.number || 'manual' }}
+        path: app/build/outputs/apk/foss/release/app-release.apk
+        retention-days: 30
+    
+    - name: Comment PR with APK download link
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const artifactName = `rush-apk-${context.payload.pull_request.number}`;
+          const comment = `🚀 **APK Build Complete!**
+          
+          The APK has been successfully built and is available for download:
+          
+          📱 **Download APK**: Go to the [Actions tab](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) and download the \`${artifactName}\` artifact.
+          
+          **Build Details:**
+          - Commit: ${context.sha.substring(0, 7)}
+          - Variant: FOSS Release
+          - Size: The APK size will be shown in the artifact details
+          
+          **To install:** Download the APK file from the artifact and install it on your Android device.
+          
+          > **Note:** You may need to enable "Install from unknown sources" in your device settings.`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
