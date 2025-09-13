@@ -99,6 +99,10 @@ dependencies {
     "playImplementation"(libs.purchases.ui)
     "playImplementation"(libs.purchases)
 
+    // Force compatible androidx.core versions to avoid AGP conflicts
+    implementation("androidx.core:core:1.13.1")
+    implementation("androidx.core:core-ktx:1.13.1")
+
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.ui.tooling)
