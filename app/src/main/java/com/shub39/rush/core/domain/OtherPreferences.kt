@@ -32,4 +32,7 @@ interface OtherPreferences {
 
     fun getOnboardingDoneFlow(): Flow<Boolean>
     suspend fun updateOnboardingDone(done: Boolean)
+
+    fun getSearchRefinementFlow(): Flow<String>
+    suspend fun updateSearchRefinement(refinement: String)
 }

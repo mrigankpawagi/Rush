@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Upload
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
@@ -37,6 +38,7 @@ import androidx.compose.material3.IconButtonShapes
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumFlexibleTopAppBar
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -234,6 +236,34 @@ fun SettingRootPage(
                                 contentDescription = null
                             )
                         }
+                    }
+                )
+            }
+
+            // search refinement setting
+            item {
+                ListItem(
+                    headlineContent = { Text(text = stringResource(R.string.search_refinement)) },
+                    supportingContent = {
+                        Column {
+                            Text(text = stringResource(R.string.search_refinement_desc))
+                            OutlinedTextField(
+                                value = state.searchRefinement,
+                                onValueChange = { onAction(SettingsPageAction.OnUpdateSearchRefinement(it)) },
+                                placeholder = { Text(stringResource(R.string.search_refinement_hint)) },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp),
+                                singleLine = true
+                            )
+                        }
+                    },
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Rounded.Search,
+                            contentDescription = "Search Refinement",
+                            modifier = Modifier.size(24.dp)
+                        )
                     }
                 )
             }

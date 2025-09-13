@@ -11,5 +11,6 @@ data class SettingsPageState(
     val restoreState: RestoreState = RestoreState.IDLE,
     val isProUser: Boolean = false,
     val onBoardingDone: Boolean = true,
-    val showPaywall: Boolean = false
+    val showPaywall: Boolean = false,
+    val searchRefinement: String = ""
 )

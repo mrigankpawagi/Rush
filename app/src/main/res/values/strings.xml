@@ -32,6 +32,9 @@
     <string name="done">Done</string>
     <string name="fetching">Loading lyrics for</string>
     <string name="searching">Searching for</string>
+    <string name="search_refinement">Search Refinement</string>
+    <string name="search_refinement_desc">Append text to every search in Rush mode (e.g., artist name)</string>
+    <string name="search_refinement_hint">e.g., Beatles, Taylor Swift</string>
     <string name="error">Something went wrong…</string>
     <string name="try_again">Try again?</string>
     <string name="correct_lyrics">Correct Lyrics</string>

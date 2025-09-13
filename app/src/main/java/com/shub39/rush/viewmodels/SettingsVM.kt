@@ -123,6 +123,8 @@ class SettingsVM(
                 SettingsPageAction.OnShowPaywall -> _state.update { it.copy(showPaywall = true) }
 
                 is SettingsPageAction.OnUpdateOnboardingDone -> datastore.updateOnboardingDone(action.done)
+
+                is SettingsPageAction.OnUpdateSearchRefinement -> datastore.updateSearchRefinement(action.refinement)
             }
         }
     }
@@ -174,6 +176,16 @@ class SettingsVM(
                             theme = it.theme.copy(
                                 materialTheme = pref
                             )
+                        )
+                    }
+                }
+                .launchIn(this)
+
+            datastore.getSearchRefinementFlow()
+                .onEach { refinement ->
+                    _state.update {
+                        it.copy(
+                            searchRefinement = refinement
                         )
                     }
                 }

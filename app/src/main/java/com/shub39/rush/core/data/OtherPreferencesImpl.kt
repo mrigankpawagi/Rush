@@ -39,6 +39,7 @@ class OtherPreferencesImpl(
         private val sortOrder = stringPreferencesKey("sort_order")
         private val onboardingDone = booleanPreferencesKey("onboarding_done")
         private val selectedFont = stringPreferencesKey("font")
+        private val searchRefinement = stringPreferencesKey("search_refinement")
     }
 
     override fun getAppThemePrefFlow(): Flow<AppTheme> = dataStore.data
@@ -121,6 +122,15 @@ class OtherPreferencesImpl(
     override suspend fun updateOnboardingDone(done: Boolean) {
         dataStore.edit { settings ->
             settings[onboardingDone] = done
+        }
+    }
+
+    override fun getSearchRefinementFlow(): Flow<String> = dataStore.data
+        .map { preferences -> preferences[searchRefinement] ?: "" }
+
+    override suspend fun updateSearchRefinement(refinement: String) {
+        dataStore.edit { settings ->
+            settings[searchRefinement] = refinement
         }
     }
 

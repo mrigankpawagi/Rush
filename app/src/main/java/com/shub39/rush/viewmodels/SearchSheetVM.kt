@@ -145,6 +145,14 @@ class SearchSheetVM(
     ) {
         if (query.isEmpty() || stateLayer.lyricsState.value.searching.first || query == _lastSearched.value) return
 
+        // Apply search refinement if it's set
+        val searchRefinement = stateLayer.settingsState.value.searchRefinement
+        val refinedQuery = if (searchRefinement.isNotBlank()) {
+            "$query $searchRefinement".trim()
+        } else {
+            query
+        }
+
         viewModelScope.launch {
             stateLayer.lyricsState.update {
                 it.copy(
@@ -160,7 +168,7 @@ class SearchSheetVM(
             }
 
             try {
-                when (val result = repo.searchGenius(query)) {
+                when (val result = repo.searchGenius(refinedQuery)) {
                     is Result.Error -> {
                         stateLayer.lyricsState.update {
                             it.copy(
