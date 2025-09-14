@@ -20,6 +20,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+        
     - name: Cache Gradle packages
       uses: actions/cache@v4
       with:
@@ -32,6 +35,9 @@ jobs:
           
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
+    - name: Clean build directory
+      run: ./gradlew clean
       
     - name: Build Debug APK (FOSS flavor)
       run: ./gradlew assembleFossDebug
@@ -47,28 +53,32 @@ jobs:
       
     - name: Upload FOSS Debug APK
       uses: actions/upload-artifact@v4
+      if: success()
       with:
-        name: rush-foss-debug-apk
+        name: Rush-FOSS-Debug-${{ github.sha }}
         path: app/build/outputs/apk/foss/debug/*.apk
         retention-days: 30
         
     - name: Upload FOSS Release APK
       uses: actions/upload-artifact@v4
+      if: success()
       with:
-        name: rush-foss-release-apk
+        name: Rush-FOSS-Release-${{ github.sha }}
         path: app/build/outputs/apk/foss/release/*.apk
         retention-days: 30
         
     - name: Upload Play Debug APK
       uses: actions/upload-artifact@v4
+      if: success()
       with:
-        name: rush-play-debug-apk
+        name: Rush-Play-Debug-${{ github.sha }}
         path: app/build/outputs/apk/play/debug/*.apk
         retention-days: 30
         
     - name: Upload Play Release APK
       uses: actions/upload-artifact@v4
+      if: success()
       with:
-        name: rush-play-release-apk
+        name: Rush-Play-Release-${{ github.sha }}
         path: app/build/outputs/apk/play/release/*.apk
         retention-days: 30

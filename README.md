@@ -42,6 +42,13 @@ So, I made this app to get and store lyrics for my favorite songs from Genius an
 all in Material 3 look. As an audiophile, This has now become my way to listen to complete albums with lyrics without 
 dealing with genius's "UI".
 
+## Development 🛠️
+For developers and contributors, APKs are automatically built for every push and pull request. You can download the latest build artifacts from the [Actions tab](../../actions) to test changes without building locally.
+
+Available build variants:
+- **FOSS Debug/Release**: For F-Droid and general use
+- **Play Debug/Release**: For Google Play Store distribution
+
 ## Translations 🔠
 Translations are done via weblate, you can contribute there!
 [<img src="https://hosted.weblate.org/widget/rush/multi-auto.svg" alt="Translation status" />](https://hosted.weblate.org/engage/rush/)
