@@ -9,16 +9,16 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-val appName = "Rush"
+val appName = "Rush (Mrigank)"
 val appVersionName = "5.0.0"
 val appVersionCode = 5000
 
 android {
-    namespace = "com.shub39.rush"
+    namespace = "com.mrigankpawagi.rush"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.shub39.rush"
+        applicationId = "com.mrigankpawagi.rush"
         minSdk = 24
         targetSdk = 36
         versionCode = appVersionCode
