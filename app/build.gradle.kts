@@ -95,9 +95,9 @@ android {
     }
     
     lint {
-        disable("NullSafeMutableLiveData")
+        disable.add("NullSafeMutableLiveData")
         // Disable other lint checks that might cause analysis issues
-        disable("UnusedResources", "UnusedIds")
+        disable.addAll(listOf("UnusedResources", "UnusedIds"))
         // Set lint to be non-fatal in case of unexpected issues
         abortOnError = false
     }
