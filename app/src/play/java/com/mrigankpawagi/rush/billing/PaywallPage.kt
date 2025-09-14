@@ -1,4 +1,4 @@
-package com.shub39.rush.billing
+package com.mrigankpawagi.rush.billing
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

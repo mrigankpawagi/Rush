@@ -1,4 +1,4 @@
-package com.shub39.rush.billing
+package com.mrigankpawagi.rush.billing
 
 import com.revenuecat.purchases.CacheFetchPolicy
 import com.revenuecat.purchases.Purchases

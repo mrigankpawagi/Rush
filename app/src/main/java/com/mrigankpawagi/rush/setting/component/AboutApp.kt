@@ -138,7 +138,7 @@ fun AboutApp() {
             }
 
             Button(
-                onClick = { uriHandler.openUri("https://play.google.com/store/apps/details?id=com.shub39.rush.play") }
+                onClick = { uriHandler.openUri("https://play.google.com/store/apps/details?id=com.mrigankpawagi.rush.play") }
             ) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),

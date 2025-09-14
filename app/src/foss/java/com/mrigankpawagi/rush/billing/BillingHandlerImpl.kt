@@ -1,4 +1,4 @@
-package com.shub39.rush.billing
+package com.mrigankpawagi.rush.billing
 
 class BillingHandlerImpl: BillingHandler {
     override suspend fun isProUser(): Boolean = true
