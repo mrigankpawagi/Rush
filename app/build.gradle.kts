@@ -14,11 +14,11 @@ val appVersionName = "5.0.0"
 val appVersionCode = 5000
 
 android {
-    namespace = "com.mrigankpawagi.rush"
+    namespace = "com.shub39.rush"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.mrigankpawagi.rush"
+        applicationId = "com.shub39.rush"
         minSdk = 24
         targetSdk = 36
         versionCode = appVersionCode
